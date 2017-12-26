@@ -55,6 +55,7 @@ namespace BillingSystem
                 }
                 else if (c.GetType() == typeof(GroupBox))
                 {
+                    c.ForeColor = Color.White;
                     foreach (Control gc in c.Controls)
                     {
                         if (gc.GetType() == typeof(Label))
@@ -86,46 +87,33 @@ namespace BillingSystem
             SetControlsColor(this);
         }
 
-        private void Form1_Load(object sender, System.EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void buttonAddCustomers_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonCreateInvoice_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void buttonAddCustomers_Click_1(object sender, EventArgs e)
+        private void buttonAddCustomers_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Customers customersForm = new Customers();
             customersForm.ShowDialog();
+            this.Show();
         }
 
         private void buttonAddItems_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Items itemsForm = new Items();
             itemsForm.ShowDialog();
+            this.Show();
         }
 
-        private void buttonCreateInvoice_Click_1(object sender, EventArgs e)
+        private void buttonCreateInvoice_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Invoices invoicesForm = new Invoices();
             invoicesForm.ShowDialog();
+            this.Show();
         }
     }
 }

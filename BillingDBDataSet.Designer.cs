@@ -20,9 +20,9 @@ namespace BillingSystem {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("VenkateshBillingDBDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("BillingDBDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class VenkateshBillingDBDataSet : global::System.Data.DataSet {
+    public partial class BillingDBDataSet : global::System.Data.DataSet {
         
         private CustomersDataTable tableCustomers;
         
@@ -44,7 +44,7 @@ namespace BillingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public VenkateshBillingDBDataSet() {
+        public BillingDBDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -55,7 +55,7 @@ namespace BillingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected VenkateshBillingDBDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected BillingDBDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -193,7 +193,7 @@ namespace BillingSystem {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            VenkateshBillingDBDataSet cln = ((VenkateshBillingDBDataSet)(base.Clone()));
+            BillingDBDataSet cln = ((BillingDBDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -304,9 +304,9 @@ namespace BillingSystem {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "VenkateshBillingDBDataSet";
+            this.DataSetName = "BillingDBDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/VenkateshBillingDBDataSet.xsd";
+            this.Namespace = "http://tempuri.org/BillingDBDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableCustomers = new CustomersDataTable();
@@ -374,7 +374,7 @@ namespace BillingSystem {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            VenkateshBillingDBDataSet ds = new VenkateshBillingDBDataSet();
+            BillingDBDataSet ds = new BillingDBDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -775,7 +775,7 @@ namespace BillingSystem {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                VenkateshBillingDBDataSet ds = new VenkateshBillingDBDataSet();
+                BillingDBDataSet ds = new BillingDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1073,7 +1073,7 @@ namespace BillingSystem {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                VenkateshBillingDBDataSet ds = new VenkateshBillingDBDataSet();
+                BillingDBDataSet ds = new BillingDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1296,9 +1296,10 @@ namespace BillingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ItemsRow FindByID(int ID) {
+            public ItemsRow FindByIDItemCode(int ID, string ItemCode) {
                 return ((ItemsRow)(this.Rows.Find(new object[] {
-                            ID})));
+                            ID,
+                            ItemCode})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1351,12 +1352,12 @@ namespace BillingSystem {
                 this.columnLabourRate = new global::System.Data.DataColumn("LabourRate", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLabourRate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnID}, true));
+                                this.columnID,
+                                this.columnItemCode}, true));
                 this.columnID.AutoIncrement = true;
                 this.columnID.AutoIncrementSeed = -1;
                 this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
-                this.columnID.Unique = true;
                 this.columnItemCode.AllowDBNull = false;
                 this.columnItemCode.MaxLength = 255;
                 this.columnItemName.MaxLength = 255;
@@ -1427,7 +1428,7 @@ namespace BillingSystem {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                VenkateshBillingDBDataSet ds = new VenkateshBillingDBDataSet();
+                BillingDBDataSet ds = new BillingDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1826,7 +1827,7 @@ namespace BillingSystem {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                VenkateshBillingDBDataSet ds = new VenkateshBillingDBDataSet();
+                BillingDBDataSet ds = new BillingDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2221,7 +2222,7 @@ namespace BillingSystem {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                VenkateshBillingDBDataSet ds = new VenkateshBillingDBDataSet();
+                BillingDBDataSet ds = new BillingDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3700,7 +3701,7 @@ namespace BillingSystem {
         }
     }
 }
-namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
+namespace BillingSystem.BillingDBDataSetTableAdapters {
     
     
     /// <summary>
@@ -3910,7 +3911,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.VenkateshBillingDBConnectionString;
+            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.BillingDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3928,7 +3929,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(VenkateshBillingDBDataSet.CustomersDataTable dataTable) {
+        public virtual int Fill(BillingDBDataSet.CustomersDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -3941,9 +3942,9 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual VenkateshBillingDBDataSet.CustomersDataTable GetData() {
+        public virtual BillingDBDataSet.CustomersDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            VenkateshBillingDBDataSet.CustomersDataTable dataTable = new VenkateshBillingDBDataSet.CustomersDataTable();
+            BillingDBDataSet.CustomersDataTable dataTable = new BillingDBDataSet.CustomersDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -3951,14 +3952,14 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet.CustomersDataTable dataTable) {
+        public virtual int Update(BillingDBDataSet.CustomersDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet dataSet) {
+        public virtual int Update(BillingDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Customers");
         }
         
@@ -4471,7 +4472,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.VenkateshBillingDBConnectionString;
+            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.BillingDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4488,7 +4489,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(VenkateshBillingDBDataSet.InvoicesDataTable dataTable) {
+        public virtual int Fill(BillingDBDataSet.InvoicesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -4501,9 +4502,9 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual VenkateshBillingDBDataSet.InvoicesDataTable GetData() {
+        public virtual BillingDBDataSet.InvoicesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            VenkateshBillingDBDataSet.InvoicesDataTable dataTable = new VenkateshBillingDBDataSet.InvoicesDataTable();
+            BillingDBDataSet.InvoicesDataTable dataTable = new BillingDBDataSet.InvoicesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -4511,14 +4512,14 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet.InvoicesDataTable dataTable) {
+        public virtual int Update(BillingDBDataSet.InvoicesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet dataSet) {
+        public virtual int Update(BillingDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Invoices");
         }
         
@@ -4843,7 +4844,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.VenkateshBillingDBConnectionString;
+            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.BillingDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4852,8 +4853,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        ID, ItemCode, ItemName, [Size], Hishob, Tunch, LabourRate\r\nFROM    " +
-                "        Items";
+            this._commandCollection[0].CommandText = "SELECT ID, ItemCode, ItemName, [Size], Hishob, Tunch, LabourRate FROM Items";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -4861,7 +4861,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(VenkateshBillingDBDataSet.ItemsDataTable dataTable) {
+        public virtual int Fill(BillingDBDataSet.ItemsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -4874,9 +4874,9 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual VenkateshBillingDBDataSet.ItemsDataTable GetData() {
+        public virtual BillingDBDataSet.ItemsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            VenkateshBillingDBDataSet.ItemsDataTable dataTable = new VenkateshBillingDBDataSet.ItemsDataTable();
+            BillingDBDataSet.ItemsDataTable dataTable = new BillingDBDataSet.ItemsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -4884,14 +4884,14 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet.ItemsDataTable dataTable) {
+        public virtual int Update(BillingDBDataSet.ItemsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet dataSet) {
+        public virtual int Update(BillingDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Items");
         }
         
@@ -5138,6 +5138,14 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
                 }
             }
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string ItemName, global::System.Nullable<int> Size, global::System.Nullable<int> Hishob, global::System.Nullable<int> Tunch, global::System.Nullable<int> LabourRate, int Original_ID, string Original_ItemCode, string Original_ItemName, global::System.Nullable<int> Original_Size, global::System.Nullable<int> Original_Hishob, global::System.Nullable<int> Original_Tunch, global::System.Nullable<int> Original_LabourRate) {
+            return this.Update(Original_ItemCode, ItemName, Size, Hishob, Tunch, LabourRate, Original_ID, Original_ItemCode, Original_ItemName, Original_Size, Original_Hishob, Original_Tunch, Original_LabourRate);
+        }
     }
     
     /// <summary>
@@ -5296,7 +5304,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.VenkateshBillingDBConnectionString;
+            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.BillingDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5314,7 +5322,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(VenkateshBillingDBDataSet.ItemsSoldDataTable dataTable) {
+        public virtual int Fill(BillingDBDataSet.ItemsSoldDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -5327,9 +5335,9 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual VenkateshBillingDBDataSet.ItemsSoldDataTable GetData() {
+        public virtual BillingDBDataSet.ItemsSoldDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            VenkateshBillingDBDataSet.ItemsSoldDataTable dataTable = new VenkateshBillingDBDataSet.ItemsSoldDataTable();
+            BillingDBDataSet.ItemsSoldDataTable dataTable = new BillingDBDataSet.ItemsSoldDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -5337,14 +5345,14 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet.ItemsSoldDataTable dataTable) {
+        public virtual int Update(BillingDBDataSet.ItemsSoldDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(VenkateshBillingDBDataSet dataSet) {
+        public virtual int Update(BillingDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "ItemsSold");
         }
         
@@ -5590,7 +5598,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.VenkateshBillingDBConnectionString;
+            this._connection.ConnectionString = global::BillingSystem.Properties.Settings.Default.BillingDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5608,7 +5616,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(VenkateshBillingDBDataSet.BillDataTable dataTable) {
+        public virtual int Fill(BillingDBDataSet.BillDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -5621,9 +5629,9 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual VenkateshBillingDBDataSet.BillDataTable GetData() {
+        public virtual BillingDBDataSet.BillDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            VenkateshBillingDBDataSet.BillDataTable dataTable = new VenkateshBillingDBDataSet.BillDataTable();
+            BillingDBDataSet.BillDataTable dataTable = new BillingDBDataSet.BillDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -5789,7 +5797,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(VenkateshBillingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(BillingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._customersTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Customers.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -5835,7 +5843,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(VenkateshBillingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(BillingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._customersTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Customers.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -5877,7 +5885,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(VenkateshBillingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(BillingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._itemsSoldTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ItemsSold.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -5943,7 +5951,7 @@ namespace BillingSystem.VenkateshBillingDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(VenkateshBillingDBDataSet dataSet) {
+        public virtual int UpdateAll(BillingDBDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

@@ -33,7 +33,7 @@
             this.billBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.billBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.venkateshBillingDBDataSet = new BillingSystem.VenkateshBillingDBDataSet();
+            this.venkateshBillingDBDataSet = new BillingSystem.BillingDBDataSet();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -45,8 +45,8 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.billBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.billTableAdapter = new BillingSystem.VenkateshBillingDBDataSetTableAdapters.BillTableAdapter();
-            this.tableAdapterManager = new BillingSystem.VenkateshBillingDBDataSetTableAdapters.TableAdapterManager();
+            this.billTableAdapter = new BillingSystem.BillingDBDataSetTableAdapters.BillTableAdapter();
+            this.tableAdapterManager = new BillingSystem.BillingDBDataSetTableAdapters.TableAdapterManager();
             this.billDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,7 +112,7 @@
             // 
             // venkateshBillingDBDataSet
             // 
-            this.venkateshBillingDBDataSet.DataSetName = "VenkateshBillingDBDataSet";
+            this.venkateshBillingDBDataSet.DataSetName = "BillingDBDataSet";
             this.venkateshBillingDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorCountItem
@@ -212,7 +212,7 @@
             this.tableAdapterManager.InvoicesTableAdapter = null;
             this.tableAdapterManager.ItemsSoldTableAdapter = null;
             this.tableAdapterManager.ItemsTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = BillingSystem.VenkateshBillingDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UpdateOrder = BillingSystem.BillingDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // billDataGridView
             // 
@@ -347,7 +347,7 @@
         private System.Windows.Forms.BindingNavigator billBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.BindingSource billBindingSource;
-        private VenkateshBillingDBDataSet venkateshBillingDBDataSet;
+        private BillingDBDataSet venkateshBillingDBDataSet;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
@@ -359,8 +359,8 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton billBindingNavigatorSaveItem;
-        private VenkateshBillingDBDataSetTableAdapters.BillTableAdapter billTableAdapter;
-        private VenkateshBillingDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private BillingDBDataSetTableAdapters.BillTableAdapter billTableAdapter;
+        private BillingDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DataGridView billDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;

@@ -54,7 +54,7 @@
             this.buttonCreateInvoice.TabIndex = 6;
             this.buttonCreateInvoice.Text = "Create Invoices";
             this.buttonCreateInvoice.UseVisualStyleBackColor = true;
-            this.buttonCreateInvoice.Click += new System.EventHandler(this.buttonCreateInvoice_Click_1);
+            this.buttonCreateInvoice.Click += new System.EventHandler(this.buttonCreateInvoice_Click);
             // 
             // buttonAddItems
             // 
@@ -74,7 +74,7 @@
             this.buttonAddCustomers.TabIndex = 4;
             this.buttonAddCustomers.Text = "Add Customers";
             this.buttonAddCustomers.UseVisualStyleBackColor = true;
-            this.buttonAddCustomers.Click += new System.EventHandler(this.buttonAddCustomers_Click_1);
+            this.buttonAddCustomers.Click += new System.EventHandler(this.buttonAddCustomers_Click);
             // 
             // Main
             // 
@@ -92,8 +92,7 @@
             this.MinimizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Venkatesh Jewellers - Billing System";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = " Venkatesh Jewellers - Billing System";
             this.ResumeLayout(false);
 
         }

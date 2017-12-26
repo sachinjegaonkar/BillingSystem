@@ -39,10 +39,10 @@
             System.Windows.Forms.Label phoneLabel;
             System.Windows.Forms.Label stateLabel;
             System.Windows.Forms.Label pincodeLabel;
-            this.venkateshBillingDBDataSet = new BillingSystem.VenkateshBillingDBDataSet();
+            this.venkateshBillingDBDataSet = new BillingSystem.BillingDBDataSet();
             this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.customersTableAdapter = new BillingSystem.VenkateshBillingDBDataSetTableAdapters.CustomersTableAdapter();
-            this.tableAdapterManager = new BillingSystem.VenkateshBillingDBDataSetTableAdapters.TableAdapterManager();
+            this.customersTableAdapter = new BillingSystem.BillingDBDataSetTableAdapters.CustomersTableAdapter();
+            this.tableAdapterManager = new BillingSystem.BillingDBDataSetTableAdapters.TableAdapterManager();
             this.customersBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -99,7 +99,7 @@
             // 
             // venkateshBillingDBDataSet
             // 
-            this.venkateshBillingDBDataSet.DataSetName = "VenkateshBillingDBDataSet";
+            this.venkateshBillingDBDataSet.DataSetName = "BillingDBDataSet";
             this.venkateshBillingDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // customersBindingSource
@@ -118,7 +118,7 @@
             this.tableAdapterManager.InvoicesTableAdapter = null;
             this.tableAdapterManager.ItemsSoldTableAdapter = null;
             this.tableAdapterManager.ItemsTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = BillingSystem.VenkateshBillingDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UpdateOrder = BillingSystem.BillingDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // customersBindingNavigator
             // 
@@ -580,10 +580,10 @@
 
         #endregion
 
-        private VenkateshBillingDBDataSet venkateshBillingDBDataSet;
+        private BillingDBDataSet venkateshBillingDBDataSet;
         private System.Windows.Forms.BindingSource customersBindingSource;
-        private VenkateshBillingDBDataSetTableAdapters.CustomersTableAdapter customersTableAdapter;
-        private VenkateshBillingDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private BillingDBDataSetTableAdapters.CustomersTableAdapter customersTableAdapter;
+        private BillingDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingNavigator customersBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;

@@ -78,6 +78,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillingDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillingDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Customers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,11 +109,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VenkateshBillingDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VenkateshBillingDBDataSet.xsd</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Customers.resx">
       <DependentUpon>Customers.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +131,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="BillingDBDataSet.xsc">
+      <DependentUpon>BillingDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BillingDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BillingDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BillingDBDataSet.xss">
+      <DependentUpon>BillingDBDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,24 +151,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="VenkateshBillingDBDataSet.xsc">
-      <DependentUpon>VenkateshBillingDBDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="VenkateshBillingDBDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>VenkateshBillingDBDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="VenkateshBillingDBDataSet.xss">
-      <DependentUpon>VenkateshBillingDBDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Tradition of Trust.jpg" />
-    <Content Include="VenkateshBillingDB.accdb">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BillingDB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
