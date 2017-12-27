@@ -59,5 +59,22 @@ namespace BillingSystem
         {
 
         }
+
+        private void buttonAddCustomer_Click(object sender, EventArgs e)
+        {
+            this.customersBindingSource.AddNew();
+        }
+
+        private void buttonUpdateCustomer_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.customersBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.venkateshBillingDBDataSet);
+        }
+
+        private void buttonDeleteCustomer_Click(object sender, EventArgs e)
+        {
+            this.customersBindingSource.RemoveCurrent();
+        }
     }
 }
