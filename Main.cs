@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -74,6 +76,11 @@ namespace BillingSystem
                         {
                             gc.BackColor = Main.yellowColor;
                         }
+                        else if (gc.GetType() == typeof(RadioButton))
+                        {
+                            gc.ForeColor = Color.White;
+                            gc.BackColor = Main.brandColor;
+                        }
                         else
                             gc.BackColor = Main.yellowColor;
                     }
@@ -87,6 +94,17 @@ namespace BillingSystem
             SetControlsColor(this);
         }
 
+        private void Main_Load(object sender, EventArgs e)
+        {
+            // Set cursor as hourglass
+            Cursor.Current = Cursors.WaitCursor;
+
+            // TODO: Do Something here...
+
+            // Set cursor as default arrow
+            Cursor.Current = Cursors.Default;
+        }
+
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -94,26 +112,20 @@ namespace BillingSystem
 
         private void buttonAddCustomers_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Customers customersForm = new Customers();
             customersForm.ShowDialog();
-            this.Show();
         }
 
         private void buttonAddItems_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Items itemsForm = new Items();
             itemsForm.ShowDialog();
-            this.Show();
         }
 
         private void buttonCreateInvoice_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Invoices invoicesForm = new Invoices();
             invoicesForm.ShowDialog();
-            this.Show();
         }
     }
 }

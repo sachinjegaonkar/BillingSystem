@@ -159,9 +159,7 @@
     <None Include="Resources\Tradition of Trust.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BillingDB.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="BillingDB.accdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

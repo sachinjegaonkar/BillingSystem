@@ -1354,10 +1354,13 @@ namespace BillingSystem {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID,
                                 this.columnItemCode}, true));
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint2", new global::System.Data.DataColumn[] {
+                                this.columnID}, false));
                 this.columnID.AutoIncrement = true;
                 this.columnID.AutoIncrementSeed = -1;
                 this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
+                this.columnID.Unique = true;
                 this.columnItemCode.AllowDBNull = false;
                 this.columnItemCode.MaxLength = 255;
                 this.columnItemName.MaxLength = 255;

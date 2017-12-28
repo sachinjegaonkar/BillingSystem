@@ -18,7 +18,13 @@ namespace BillingSystem
 
         private void Items_Load(object sender, EventArgs e)
         {
+            // Set cursor as hourglass
+            Cursor.Current = Cursors.WaitCursor;
 
+            // TODO: Do Something here...
+
+            // Set cursor as default arrow
+            Cursor.Current = Cursors.Default;
         }
     }
 }
