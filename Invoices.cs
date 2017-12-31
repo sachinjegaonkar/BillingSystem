@@ -1,169 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BillingSystem
 {
-    // An abastract class that implements the functionality of an image button
-    // except for a single abstract method to load the Normal, Hot and Disabled 
-    // images that represent the icon that is displayed on the button. The loading
-    // of these images is done in each derived concrete class.
-    /*public abstract class DataGridViewImageButtonCell : DataGridViewButtonCell
-    {
-        private bool _enabled;                // Is the button enabled
-        private PushButtonState _buttonState; // What is the button state
-        protected Image _buttonImageHot;      // The hot image
-        protected Image _buttonImageNormal;   // The normal image
-        protected Image _buttonImageDisabled; // The disabled image
-        private int _buttonImageOffset;       // The amount of offset or border around the image
-
-        protected DataGridViewImageButtonCell()
-        {
-            // In my project, buttons are disabled by default
-            _enabled = false;
-            _buttonState = PushButtonState.Disabled;
-
-            // Changing this value affects the appearance of the image on the button.
-            _buttonImageOffset = 2;
-
-            // Call the routine to load the images specific to a column.
-            LoadImages();
-        }
-
-        // Button Enabled Property
-        public bool Enabled
-        {
-            get
-            {
-                return _enabled;
-            }
-
-            set
-            {
-                _enabled = value;
-                _buttonState = value ? PushButtonState.Normal : PushButtonState.Disabled;
-            }
-        }
-
-        // PushButton State Property
-        public PushButtonState ButtonState
-        {
-            get { return _buttonState; }
-            set { _buttonState = value; }
-        }
-
-        // Image Property
-        // Returns the correct image based on the control's state.
-        public Image ButtonImage
-        {
-            get
-            {
-                switch (_buttonState)
-                {
-                    case PushButtonState.Disabled:
-                        return _buttonImageDisabled;
-
-                    case PushButtonState.Hot:
-                        return _buttonImageHot;
-
-                    case PushButtonState.Normal:
-                        return _buttonImageNormal;
-
-                    case PushButtonState.Pressed:
-                        return _buttonImageNormal;
-
-                    case PushButtonState.Default:
-                        return _buttonImageNormal;
-
-                    default:
-                        return _buttonImageNormal;
-                }
-            }
-        }
-
-        protected override void Paint(Graphics graphics,
-            Rectangle clipBounds, Rectangle cellBounds, int rowIndex,
-            DataGridViewElementStates elementState, object value,
-            object formattedValue, string errorText,
-            DataGridViewCellStyle cellStyle,
-            DataGridViewAdvancedBorderStyle advancedBorderStyle,
-            DataGridViewPaintParts paintParts)
-        {
-            //base.Paint(graphics, clipBounds, cellBounds, rowIndex, elementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
-
-            // Draw the cell background, if specified.
-            if ((paintParts & DataGridViewPaintParts.Background) ==
-                DataGridViewPaintParts.Background)
-            {
-                SolidBrush cellBackground =
-                    new SolidBrush(cellStyle.BackColor);
-                graphics.FillRectangle(cellBackground, cellBounds);
-                cellBackground.Dispose();
-            }
-
-            // Draw the cell borders, if specified.
-            if ((paintParts & DataGridViewPaintParts.Border) ==
-                DataGridViewPaintParts.Border)
-            {
-                PaintBorder(graphics, clipBounds, cellBounds, cellStyle,
-                    advancedBorderStyle);
-            }
-
-            // Calculate the area in which to draw the button.
-            // Adjusting the following algorithm and values affects
-            // how the image will appear on the button.
-            Rectangle buttonArea = cellBounds;
-
-            Rectangle buttonAdjustment =
-                BorderWidths(advancedBorderStyle);
-
-            buttonArea.X += buttonAdjustment.X;
-            buttonArea.Y += buttonAdjustment.Y;
-            buttonArea.Height -= buttonAdjustment.Height;
-            buttonArea.Width -= buttonAdjustment.Width;
-
-            Rectangle imageArea = new Rectangle(
-                buttonArea.X + _buttonImageOffset,
-                buttonArea.Y + _buttonImageOffset,
-                16,
-                16);
-
-            ButtonRenderer.DrawButton(graphics, buttonArea, ButtonImage, imageArea, false, ButtonState);
-        }
-
-        // An abstract method that must be created in each derived class.
-        // The images in the derived class will be loaded here.
-        public abstract void LoadImages();
-    }
-
-    public class DataGridViewImageButtonDeleteCell : DataGridViewImageButtonCell
-    {
-        public override void LoadImages()
-        {
-            // Load the Normal, Hot and Disabled "Delete" images here.
-            // Load them from a resource file, local file, hex string, etc.
-
-            //_buttonImageHot = Image.FromFile("C:\\delete_16_h.bmp");
-            //_buttonImageNormal = Image.FromFile("C:\\delete_16.bmp");
-            //_buttonImageDisabled = Image.FromFile("C:\\delete_d.bmp");
-        }
-    }
-    public class DataGridViewImageButtonDeleteColumn : DataGridViewButtonColumn
-    {
-        public DataGridViewImageButtonDeleteColumn()
-        {
-            this.CellTemplate = new DataGridViewImageButtonDeleteCell();
-            this.Width = 22;
-            this.Resizable = DataGridViewTriState.False;
-        }
-    }*/
-
     public partial class Invoices : Form
     {
         #region Member Variables
@@ -232,6 +77,7 @@ namespace BillingSystem
             this.dataGridViewTextBoxColumn12.HeaderText = "Labour";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn12.Width = 80;
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -239,22 +85,23 @@ namespace BillingSystem
             this.dataGridViewTextBoxColumn11.HeaderText = "Fine";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn11.Width = 80;
             // 
             // dataGridViewTextBoxColumn10
             // 
             this.dataGridViewTextBoxColumn10.DataPropertyName = "LabourRate";
-            this.dataGridViewTextBoxColumn10.HeaderText = "LabourRate";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Labour-Rate";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn10.Width = 75;
+            this.dataGridViewTextBoxColumn10.Width = 90;
             // 
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.DataPropertyName = "Tunch";
-            this.dataGridViewTextBoxColumn9.HeaderText = "Tunch";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Tunch %";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn9.Width = 50;
+            this.dataGridViewTextBoxColumn9.Width = 55;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -267,15 +114,15 @@ namespace BillingSystem
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "NetWeight";
-            this.dataGridViewTextBoxColumn7.HeaderText = "NetWeight";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Net-Weight";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn7.Width = 75;
+            this.dataGridViewTextBoxColumn7.Width = 90;
             // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "WtChk";
-            this.dataGridViewTextBoxColumn6.HeaderText = "WtChk";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Wt Chk";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn6.Width = 50;
@@ -283,10 +130,10 @@ namespace BillingSystem
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "GrossWeight";
-            this.dataGridViewTextBoxColumn5.HeaderText = "GrossWeight";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Gross-Weight";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn5.Width = 75;
+            this.dataGridViewTextBoxColumn5.Width = 80;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -299,7 +146,7 @@ namespace BillingSystem
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "ItemName";
-            this.dataGridViewTextBoxColumn3.HeaderText = "ItemName";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Item Name";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn3.Width = 275;
@@ -307,9 +154,10 @@ namespace BillingSystem
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "ItemCode";
-            this.dataGridViewTextBoxColumn2.HeaderText = "ItemCode";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Item Code";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn2.Width = 100;
             // 
             // dataGridViewButtonColumn1
             // 
@@ -347,7 +195,6 @@ namespace BillingSystem
         }
         #endregion
 
-
         #region Event Handlers
         private void Invoices_Load(object sender, EventArgs e)
         {
@@ -377,55 +224,83 @@ namespace BillingSystem
             Cursor.Current = Cursors.Default;
         }
 
+        private bool ValideItemEntries()
+        {
+            if (itemCodeTextBox.Text != string.Empty &&
+                pcsTextBox.Text != string.Empty &&
+                grossWeightTextBox.Text != string.Empty &&
+                wtChkTextBox.Text != string.Empty &&
+                netWeightTextBox.Text != string.Empty &&
+                hishobTextBox.Text != string.Empty &&
+                //tunchTextBox.Text != string.Empty &&
+                labourRateTextBox.Text != string.Empty &&
+                fineTextBox.Text != string.Empty &&
+                labourTextBox.Text != string.Empty
+                )
+                return true;
+
+            return false;
+        }
+
         private void buttonAddItem_Click(object sender, EventArgs e)
         {
-            billDataGridView.Rows.Add(
-                itemCodeTextBox.Text,
-                selectedItemName,
-                pcsTextBox.Text,
-                grossWeightTextBox.Text,
-                wtChkTextBox.Text,
-                netWeightTextBox.Text,
-                hishobTextBox.Text,
-                tunchTextBox.Text,
-                labourRateTextBox.Text,
-                fineTextBox.Text,
-                labourTextBox.Text
-                );
+            if (ValideItemEntries())
+            {
+                billDataGridView.Rows.Add(
+                    "",
+                    itemCodeTextBox.Text,
+                    selectedItemName,
+                    pcsTextBox.Text,
+                    grossWeightTextBox.Text,
+                    wtChkTextBox.Text,
+                    netWeightTextBox.Text,
+                    hishobTextBox.Text,
+                    tunchTextBox.Text,
+                    labourRateTextBox.Text,
+                    fineTextBox.Text,
+                    labourTextBox.Text
+                    );
+            }
+            else
+            {
+                MessageBox.Show("Please enter all the required fields in the 'Item Entry' section above and then press Add button.");
+            }
         }
 
         private void buttonUpdateItem_Click(object sender, EventArgs e)
         {
             try
             {
-                this.Validate();
+                if (IsCurrentRowValid())
+                {
+                    MessageBox.Show("Please select a valid row.");
+                    return;
+                }
 
-                this.itemsBindingSource.EndEdit();
-                this.itemsTableAdapter.Update(this.billingDBDataSet.Items);
-                this.itemsSoldBindingSource.EndEdit();
-                this.itemsSoldTableAdapter.Update(this.billingDBDataSet.ItemsSold);
-                this.customersBindingSource.EndEdit();
-                this.customersTableAdapter.Update(this.billingDBDataSet.Customers);
-                this.invoicesBindingSource.EndEdit();
-                this.invoicesTableAdapter.Update(this.billingDBDataSet.Invoices);
+                if (ValideItemEntries())
+                {
+                    var row = billDataGridView.CurrentRow;
 
-                this.billBindingSource.EndEdit();
-                this.tableAdapterManager.UpdateAll(this.billingDBDataSet);
-                MessageBox.Show("Record Updated Successfully.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+                    row.Cells[1].Value = itemCodeTextBox.Text;
+                    row.Cells[2].Value = selectedItemName;
+                    row.Cells[3].Value = pcsTextBox.Text;
+                    row.Cells[4].Value = grossWeightTextBox.Text;
+                    row.Cells[5].Value = wtChkTextBox.Text;
+                    row.Cells[6].Value = netWeightTextBox.Text;
+                    row.Cells[7].Value = hishobTextBox.Text;
+                    row.Cells[8].Value = tunchTextBox.Text;
+                    row.Cells[9].Value = labourRateTextBox.Text;
+                    row.Cells[10].Value = fineTextBox.Text;
+                    row.Cells[11].Value = labourTextBox.Text;
 
-        private void buttonDeleteItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.billBindingSource.RemoveCurrent();
-                this.tableAdapterManager.UpdateAll(this.billingDBDataSet);
-                MessageBox.Show("Record Deleted Successfully.");
+                    DisplayTotals();
+
+                    MessageBox.Show("Record Updated Successfully.");
+                }
+                else
+                {
+                    MessageBox.Show("Please enter all the required fields in the 'Item Entry' section above and then press Add button.");
+                }
             }
             catch (Exception ex)
             {
@@ -715,7 +590,6 @@ namespace BillingSystem
         {
             ClearItemEntry();
         }
-        #endregion
 
         private void billDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -730,5 +604,320 @@ namespace BillingSystem
                 billDataGridView.Rows.RemoveAt(e.RowIndex);
             }
         }
+
+        private void billDataGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            /*if (e.RowIndex == billDataGridView.NewRowIndex || e.RowIndex < 0)
+            {
+                e.Handled = true;
+                return;
+            }*/
+
+            if (e.RowIndex >= 0 && e.ColumnIndex == billDataGridView.Columns["dataGridViewButtonColumn1"].Index)
+            {
+                var image = Properties.Resources.Delete; //An image
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                var x = e.CellBounds.Left + (e.CellBounds.Width - image.Width) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - image.Height) / 2;
+                e.Graphics.DrawImage(image, new Point(x, y));
+
+                e.Handled = true;
+            }
+        }
+
+        private bool IsCurrentRowValid()
+        {
+            var row = billDataGridView.CurrentRow;
+            if (row != null)
+            {
+                return (
+                    row.Cells[1].Value != null &&
+                    row.Cells[2].Value != null &&
+                    row.Cells[3].Value != null &&
+                    row.Cells[4].Value != null &&
+                    row.Cells[5].Value != null &&
+                    row.Cells[6].Value != null &&
+                    row.Cells[7].Value != null &&
+                    //row.Cells[8].Value != null &&
+                    row.Cells[9].Value != null &&
+                    row.Cells[10].Value != null &&
+                    row.Cells[11].Value != null
+                        );
+            }
+            return false;
+        }
+
+        private void billDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (IsCurrentRowValid())
+            {
+                buttonUpdateItem.Enabled = true;
+                buttonDeleteSelected.Enabled = true;
+
+                var row = billDataGridView.CurrentRow;
+                itemCodeTextBox.Text = row.Cells[1].Value.ToString();
+                selectItemsComboBox.Text = itemMap[itemCodeTextBox.Text];
+                pcsTextBox.Text = row.Cells[3].Value.ToString();
+                grossWeightTextBox.Text = row.Cells[4].Value.ToString();
+                wtChkTextBox.Text = row.Cells[5].Value.ToString();
+                netWeightTextBox.Text = row.Cells[6].Value.ToString();
+                hishobTextBox.Text = row.Cells[7].Value.ToString();
+                tunchTextBox.Text = row.Cells[8].Value.ToString();
+                labourRateTextBox.Text = row.Cells[9].Value.ToString();
+                fineTextBox.Text = row.Cells[10].Value.ToString();
+                labourTextBox.Text = row.Cells[11].Value.ToString();
+            }
+            else
+            {
+                buttonUpdateItem.Enabled = false;
+                buttonDeleteSelected.Enabled = false;
+                ClearItemEntry();
+            }
+        }
+
+        private void buttonDeleteSelected_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in billDataGridView.SelectedRows)
+            {
+                if (row != null)
+                {
+                    billDataGridView.Rows.RemoveAt(row.Index);
+                }
+            }
+
+            buttonUpdateItem.Enabled = false;
+            buttonDeleteSelected.Enabled = false;
+        }
+
+        private void DisplayTotals()
+        {
+            if (billDataGridView.Rows.Count > 0)
+            {
+                double totalGrossWeigth, totalNetWeight, totalFine, totalLabour;
+                totalGrossWeigth = totalNetWeight = totalFine = totalLabour = 0;
+
+                for (int i = 0; i < billDataGridView.Rows.Count; i++)
+                {
+                    DataGridViewRow row = billDataGridView.Rows[i];
+                    if (row == null)
+                        continue;
+
+                    double val = 0;
+                    if (double.TryParse(row.Cells[4].Value?.ToString(), out val))
+                    {
+                        totalGrossWeigth += val;
+                    }
+                    if (double.TryParse(row.Cells[6].Value?.ToString(), out val))
+                    {
+                        totalNetWeight += val;
+                    }
+                    if (double.TryParse(row.Cells[10].Value?.ToString(), out val))
+                    {
+                        totalFine += val;
+                    }
+                    if (double.TryParse(row.Cells[11].Value?.ToString(), out val))
+                    {
+                        totalLabour += val;
+                    }
+                }
+
+                textBoxTotalGrossWeight.Text = totalGrossWeigth.ToString();
+                textBoxTotalNetWeight.Text = totalNetWeight.ToString();
+                textBoxTotalFine.Text = totalFine.ToString();
+                textBoxTotalLabour.Text = totalLabour.ToString();
+            }
+        }
+
+        private void billDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            DisplayTotals();
+            if (billDataGridView.Rows.Count > 1)
+            {
+                buttonCreateInvoice.Enabled = true;
+                buttonPrintPreview.Enabled = true;
+                buttonPrint.Enabled = true;
+                buttonExportToExcel.Enabled = true;
+            }
+        }
+
+        private void billDataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            DisplayTotals();
+            if (billDataGridView.Rows.Count <= 1)
+            {
+                buttonCreateInvoice.Enabled = false;
+                buttonPrintPreview.Enabled = false;
+                buttonPrint.Enabled = false;
+                buttonExportToExcel.Enabled = false;
+            }
+        }
+
+        private void buttonCreateInvoice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPrintPreview_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you really want to close this form?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                this.Close();
+        }
+
+        private void buttonExportToExcel_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(selectCustomerComboBox.Text))
+            {
+                MessageBox.Show("Please select customer to export data for.");
+                return;
+            }
+
+            ExportToExcel();
+        }
+
+        private void ExportToExcel()
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                var customerName = selectCustomerComboBox.Text.Substring(0, selectCustomerComboBox.Text.IndexOf(" - "));
+                var mobileNumber = selectCustomerComboBox.Text.Substring(selectCustomerComboBox.Text.IndexOf(" - ") + 3);
+
+                string templateExcel = $"{Directory.GetCurrentDirectory()}\\template.xlsx";
+                string workbookPath = $"{Directory.GetCurrentDirectory()}\\CustomerInvoices\\{customerName}.xlsx";
+
+                if (File.Exists(workbookPath)) File.Delete(workbookPath);
+                File.Copy(templateExcel, workbookPath);
+
+                //Creae an Excel application instance
+                Excel.Application excelApp = new Excel.Application();
+
+                //Create an Excel workbook instance and open it from the predefined location
+                Excel.Workbook excelWorkBook = 
+                    excelApp.Workbooks.Open(workbookPath);
+
+                //Add a new worksheet to workbook with the Datatable name
+                Excel.Worksheet excelWorkSheet = (Excel.Worksheet)excelWorkBook.Sheets.Add();
+                excelWorkSheet.Name = "Invoice";
+
+                for (int k = 1; k < billDataGridView.Columns.Count; k++)
+                {
+                    switch (k)
+                    {
+                        case 1:
+                        case 2:
+                            excelWorkSheet.Cells[1, k] = "";
+                            break;
+                        case 3:
+                            excelWorkSheet.Cells[1, k] = customerName;
+                            break;
+                        case 4:
+                            excelWorkSheet.Cells[1, k] = "";
+                            break;
+                        case 5:
+                            excelWorkSheet.Cells[1, k] = mobileNumber;
+                            break;
+                        case 6:
+                        case 7:
+                            excelWorkSheet.Cells[1, k] = "";
+                            break;
+                        case 8:
+                            excelWorkSheet.Cells[1, k] = "Invoice Date: ";
+                            break;
+                        case 9:
+                            excelWorkSheet.Cells[1, k] = "";
+                            break;
+                        case 10:
+                            excelWorkSheet.Cells[1, k] = invoiceDateTimePicker.Value.Date;
+                            break;
+                        case 11:
+                            excelWorkSheet.Cells[1, k] = "";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                for (int i = 0; i < billDataGridView.Columns.Count - 1; i++)
+                {
+                    excelWorkSheet.Cells[3, i + 1] = billDataGridView.Columns[i + 1].HeaderText;
+                }
+
+                for (int j = 0; j < billDataGridView.Rows.Count - 1; j++)
+                {
+                    for (int k = 1; k < billDataGridView.Columns.Count; k++)
+                    {
+                        excelWorkSheet.Cells[j + 4, k] = billDataGridView.Rows[j].Cells[k].Value.ToString();
+                    }
+                }
+
+                var lastRow = billDataGridView.Rows.Count + 4;
+                for (int k = 1; k < billDataGridView.Columns.Count; k++)
+                {
+                    switch(k)
+                    {
+                        case 1:
+                            excelWorkSheet.Cells[lastRow, k] = "Total: ";
+                            break;
+                        case 2:
+                        case 3:
+                            excelWorkSheet.Cells[lastRow, k] = "";
+                            break;
+                        case 4:
+                            excelWorkSheet.Cells[lastRow, k] = textBoxTotalGrossWeight.Text;
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            excelWorkSheet.Cells[lastRow, k] = textBoxTotalNetWeight.Text;
+                            break;
+                        case 7:
+                        case 8:
+                        case 9:
+                            excelWorkSheet.Cells[lastRow, k] = "";
+                            break;
+                        case 10:
+                            excelWorkSheet.Cells[lastRow, k] = textBoxTotalFine.Text;
+                            break;
+                        case 11:
+                            excelWorkSheet.Cells[lastRow, k] = textBoxTotalLabour.Text;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                excelWorkBook.Save();
+                excelWorkBook.Close();
+                excelApp.Quit();
+                Cursor = Cursors.Default;
+
+                if (MessageBox.Show("Data exported to excel successfully. Do you want to open the workbook ?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Cursor = Cursors.WaitCursor;
+                    System.Diagnostics.Process.Start(workbookPath);
+                    Cursor = Cursors.Default;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+        #endregion
     }
 }

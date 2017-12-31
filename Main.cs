@@ -24,6 +24,10 @@ namespace BillingSystem
                 {
                     c.BackColor = Main.yellowColor;
                 }
+                else if (c.GetType() == typeof(DateTimePicker))
+                {
+                    c.BackColor = Main.yellowColor;
+                }
                 else if (c.GetType() == typeof(Button))
                 {
                     c.BackColor = Main.yellowColor;

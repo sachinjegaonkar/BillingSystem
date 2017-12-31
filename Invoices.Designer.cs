@@ -64,8 +64,6 @@
             this.groupBoxNewItem = new System.Windows.Forms.GroupBox();
             this.selectItemsComboBox = new System.Windows.Forms.ComboBox();
             this.buttonNewItem = new System.Windows.Forms.Button();
-            this.buttonDeleteItem = new System.Windows.Forms.Button();
-            this.buttonUpdateItem = new System.Windows.Forms.Button();
             this.buttonAddItem = new System.Windows.Forms.Button();
             this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -78,6 +76,21 @@
             this.radioButtonPerPcs = new System.Windows.Forms.RadioButton();
             this.buttonAddNewCustomer = new System.Windows.Forms.Button();
             this.clearEntryButton = new System.Windows.Forms.Button();
+            this.buttonUpdateItem = new System.Windows.Forms.Button();
+            this.buttonDeleteSelected = new System.Windows.Forms.Button();
+            this.invoiceDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.labelTotal = new System.Windows.Forms.Label();
+            this.textBoxTotalGrossWeight = new System.Windows.Forms.TextBox();
+            this.labelDummy1 = new System.Windows.Forms.Label();
+            this.textBoxTotalNetWeight = new System.Windows.Forms.TextBox();
+            this.labelDummy2 = new System.Windows.Forms.Label();
+            this.textBoxTotalFine = new System.Windows.Forms.TextBox();
+            this.textBoxTotalLabour = new System.Windows.Forms.TextBox();
+            this.buttonPrint = new System.Windows.Forms.Button();
+            this.buttonPrintPreview = new System.Windows.Forms.Button();
+            this.buttonCreateInvoice = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonExportToExcel = new System.Windows.Forms.Button();
             itemCodeLabel = new System.Windows.Forms.Label();
             itemNameLabel = new System.Windows.Forms.Label();
             pcsLabel = new System.Windows.Forms.Label();
@@ -157,7 +170,7 @@
             // hishobLabel
             // 
             hishobLabel.AutoSize = true;
-            hishobLabel.Location = new System.Drawing.Point(47, 111);
+            hishobLabel.Location = new System.Drawing.Point(47, 109);
             hishobLabel.Name = "hishobLabel";
             hishobLabel.Size = new System.Drawing.Size(43, 13);
             hishobLabel.TabIndex = 14;
@@ -166,7 +179,7 @@
             // tunchLabel
             // 
             tunchLabel.AutoSize = true;
-            tunchLabel.Location = new System.Drawing.Point(247, 114);
+            tunchLabel.Location = new System.Drawing.Point(247, 112);
             tunchLabel.Name = "tunchLabel";
             tunchLabel.Size = new System.Drawing.Size(52, 13);
             tunchLabel.TabIndex = 16;
@@ -175,7 +188,7 @@
             // labourRateLabel
             // 
             labourRateLabel.AutoSize = true;
-            labourRateLabel.Location = new System.Drawing.Point(439, 114);
+            labourRateLabel.Location = new System.Drawing.Point(439, 112);
             labourRateLabel.Name = "labourRateLabel";
             labourRateLabel.Size = new System.Drawing.Size(69, 13);
             labourRateLabel.TabIndex = 18;
@@ -184,7 +197,7 @@
             // fineLabel
             // 
             fineLabel.AutoSize = true;
-            fineLabel.Location = new System.Drawing.Point(679, 113);
+            fineLabel.Location = new System.Drawing.Point(679, 111);
             fineLabel.Name = "fineLabel";
             fineLabel.Size = new System.Drawing.Size(30, 13);
             fineLabel.TabIndex = 20;
@@ -243,12 +256,17 @@
             this.billDataGridView.AllowUserToResizeColumns = false;
             this.billDataGridView.AllowUserToResizeRows = false;
             this.billDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.billDataGridView.Location = new System.Drawing.Point(13, 286);
+            this.billDataGridView.Location = new System.Drawing.Point(13, 273);
             this.billDataGridView.Name = "billDataGridView";
+            this.billDataGridView.ReadOnly = true;
             this.billDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.billDataGridView.Size = new System.Drawing.Size(1093, 216);
             this.billDataGridView.TabIndex = 4;
             this.billDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.billDataGridView_CellClick);
+            this.billDataGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.billDataGridView_CellPainting);
+            this.billDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.billDataGridView_RowsAdded);
+            this.billDataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.billDataGridView_RowsRemoved);
+            this.billDataGridView.SelectionChanged += new System.EventHandler(this.billDataGridView_SelectionChanged);
             // 
             // itemsBindingSource
             // 
@@ -299,7 +317,7 @@
             // 
             // hishobTextBox
             // 
-            this.hishobTextBox.Location = new System.Drawing.Point(96, 108);
+            this.hishobTextBox.Location = new System.Drawing.Point(96, 106);
             this.hishobTextBox.Name = "hishobTextBox";
             this.hishobTextBox.Size = new System.Drawing.Size(100, 20);
             this.hishobTextBox.TabIndex = 15;
@@ -307,7 +325,7 @@
             // 
             // tunchTextBox
             // 
-            this.tunchTextBox.Location = new System.Drawing.Point(305, 109);
+            this.tunchTextBox.Location = new System.Drawing.Point(305, 107);
             this.tunchTextBox.Name = "tunchTextBox";
             this.tunchTextBox.Size = new System.Drawing.Size(100, 20);
             this.tunchTextBox.TabIndex = 17;
@@ -315,7 +333,7 @@
             // 
             // labourRateTextBox
             // 
-            this.labourRateTextBox.Location = new System.Drawing.Point(514, 108);
+            this.labourRateTextBox.Location = new System.Drawing.Point(514, 106);
             this.labourRateTextBox.Name = "labourRateTextBox";
             this.labourRateTextBox.Size = new System.Drawing.Size(100, 20);
             this.labourRateTextBox.TabIndex = 19;
@@ -324,7 +342,7 @@
             // fineTextBox
             // 
             this.fineTextBox.Enabled = false;
-            this.fineTextBox.Location = new System.Drawing.Point(715, 108);
+            this.fineTextBox.Location = new System.Drawing.Point(715, 106);
             this.fineTextBox.Name = "fineTextBox";
             this.fineTextBox.Size = new System.Drawing.Size(100, 20);
             this.fineTextBox.TabIndex = 21;
@@ -362,7 +380,7 @@
             this.groupBoxNewItem.Controls.Add(this.pcsTextBox);
             this.groupBoxNewItem.Controls.Add(itemNameLabel);
             this.groupBoxNewItem.Controls.Add(this.itemCodeTextBox);
-            this.groupBoxNewItem.Location = new System.Drawing.Point(155, 44);
+            this.groupBoxNewItem.Location = new System.Drawing.Point(213, 44);
             this.groupBoxNewItem.Name = "groupBoxNewItem";
             this.groupBoxNewItem.Size = new System.Drawing.Size(831, 181);
             this.groupBoxNewItem.TabIndex = 24;
@@ -390,31 +408,11 @@
             this.buttonNewItem.UseVisualStyleBackColor = true;
             this.buttonNewItem.Click += new System.EventHandler(this.buttonNewItem_Click);
             // 
-            // buttonDeleteItem
-            // 
-            this.buttonDeleteItem.Location = new System.Drawing.Point(829, 240);
-            this.buttonDeleteItem.Name = "buttonDeleteItem";
-            this.buttonDeleteItem.Size = new System.Drawing.Size(108, 34);
-            this.buttonDeleteItem.TabIndex = 27;
-            this.buttonDeleteItem.Text = "Delete";
-            this.buttonDeleteItem.UseVisualStyleBackColor = true;
-            this.buttonDeleteItem.Click += new System.EventHandler(this.buttonDeleteItem_Click);
-            // 
-            // buttonUpdateItem
-            // 
-            this.buttonUpdateItem.Location = new System.Drawing.Point(647, 240);
-            this.buttonUpdateItem.Name = "buttonUpdateItem";
-            this.buttonUpdateItem.Size = new System.Drawing.Size(108, 32);
-            this.buttonUpdateItem.TabIndex = 26;
-            this.buttonUpdateItem.Text = "Update";
-            this.buttonUpdateItem.UseVisualStyleBackColor = true;
-            this.buttonUpdateItem.Click += new System.EventHandler(this.buttonUpdateItem_Click);
-            // 
             // buttonAddItem
             // 
-            this.buttonAddItem.Location = new System.Drawing.Point(998, 107);
+            this.buttonAddItem.Location = new System.Drawing.Point(383, 234);
             this.buttonAddItem.Name = "buttonAddItem";
-            this.buttonAddItem.Size = new System.Drawing.Size(108, 32);
+            this.buttonAddItem.Size = new System.Drawing.Size(100, 32);
             this.buttonAddItem.TabIndex = 25;
             this.buttonAddItem.Text = "Add";
             this.buttonAddItem.UseVisualStyleBackColor = true;
@@ -439,9 +437,9 @@
             // 
             this.selectCustomerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.selectCustomerComboBox.FormattingEnabled = true;
-            this.selectCustomerComboBox.Location = new System.Drawing.Point(467, 16);
+            this.selectCustomerComboBox.Location = new System.Drawing.Point(409, 15);
             this.selectCustomerComboBox.Name = "selectCustomerComboBox";
-            this.selectCustomerComboBox.Size = new System.Drawing.Size(288, 21);
+            this.selectCustomerComboBox.Size = new System.Drawing.Size(309, 21);
             this.selectCustomerComboBox.Sorted = true;
             this.selectCustomerComboBox.TabIndex = 29;
             this.selectCustomerComboBox.SelectedIndexChanged += new System.EventHandler(this.selectCustomerComboBox_SelectedIndexChanged);
@@ -449,7 +447,7 @@
             // selectCustomerLabel
             // 
             this.selectCustomerLabel.AutoSize = true;
-            this.selectCustomerLabel.Location = new System.Drawing.Point(375, 20);
+            this.selectCustomerLabel.Location = new System.Drawing.Point(313, 18);
             this.selectCustomerLabel.Name = "selectCustomerLabel";
             this.selectCustomerLabel.Size = new System.Drawing.Size(90, 13);
             this.selectCustomerLabel.TabIndex = 30;
@@ -460,7 +458,7 @@
             this.groupBoxItemEntryMode.Controls.Add(this.radioButtonRegular);
             this.groupBoxItemEntryMode.Controls.Add(this.radioButtonPerKg);
             this.groupBoxItemEntryMode.Controls.Add(this.radioButtonPerPcs);
-            this.groupBoxItemEntryMode.Location = new System.Drawing.Point(13, 44);
+            this.groupBoxItemEntryMode.Location = new System.Drawing.Point(71, 44);
             this.groupBoxItemEntryMode.Name = "groupBoxItemEntryMode";
             this.groupBoxItemEntryMode.Size = new System.Drawing.Size(136, 181);
             this.groupBoxItemEntryMode.TabIndex = 32;
@@ -504,7 +502,7 @@
             // 
             // buttonAddNewCustomer
             // 
-            this.buttonAddNewCustomer.Location = new System.Drawing.Point(761, 15);
+            this.buttonAddNewCustomer.Location = new System.Drawing.Point(724, 13);
             this.buttonAddNewCustomer.Name = "buttonAddNewCustomer";
             this.buttonAddNewCustomer.Size = new System.Drawing.Size(24, 23);
             this.buttonAddNewCustomer.TabIndex = 33;
@@ -514,26 +512,183 @@
             // 
             // clearEntryButton
             // 
-            this.clearEntryButton.Location = new System.Drawing.Point(998, 180);
+            this.clearEntryButton.Location = new System.Drawing.Point(701, 234);
             this.clearEntryButton.Name = "clearEntryButton";
-            this.clearEntryButton.Size = new System.Drawing.Size(108, 32);
+            this.clearEntryButton.Size = new System.Drawing.Size(100, 32);
             this.clearEntryButton.TabIndex = 34;
             this.clearEntryButton.Text = "Clear Entry";
             this.clearEntryButton.UseVisualStyleBackColor = true;
             this.clearEntryButton.Click += new System.EventHandler(this.clearEntryButton_Click);
+            // 
+            // buttonUpdateItem
+            // 
+            this.buttonUpdateItem.Enabled = false;
+            this.buttonUpdateItem.Location = new System.Drawing.Point(489, 234);
+            this.buttonUpdateItem.Name = "buttonUpdateItem";
+            this.buttonUpdateItem.Size = new System.Drawing.Size(100, 32);
+            this.buttonUpdateItem.TabIndex = 35;
+            this.buttonUpdateItem.Text = "Update";
+            this.buttonUpdateItem.UseVisualStyleBackColor = true;
+            this.buttonUpdateItem.Click += new System.EventHandler(this.buttonUpdateItem_Click);
+            // 
+            // buttonDeleteSelected
+            // 
+            this.buttonDeleteSelected.Location = new System.Drawing.Point(595, 234);
+            this.buttonDeleteSelected.Name = "buttonDeleteSelected";
+            this.buttonDeleteSelected.Size = new System.Drawing.Size(100, 32);
+            this.buttonDeleteSelected.TabIndex = 36;
+            this.buttonDeleteSelected.Text = "Delete Selected";
+            this.buttonDeleteSelected.UseVisualStyleBackColor = true;
+            this.buttonDeleteSelected.Click += new System.EventHandler(this.buttonDeleteSelected_Click);
+            // 
+            // invoiceDateTimePicker
+            // 
+            this.invoiceDateTimePicker.Location = new System.Drawing.Point(844, 15);
+            this.invoiceDateTimePicker.Name = "invoiceDateTimePicker";
+            this.invoiceDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.invoiceDateTimePicker.TabIndex = 37;
+            // 
+            // labelTotal
+            // 
+            this.labelTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotal.Location = new System.Drawing.Point(13, 489);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(493, 20);
+            this.labelTotal.TabIndex = 38;
+            this.labelTotal.Text = "Total: ";
+            this.labelTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxTotalGrossWeight
+            // 
+            this.textBoxTotalGrossWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTotalGrossWeight.Location = new System.Drawing.Point(503, 489);
+            this.textBoxTotalGrossWeight.Name = "textBoxTotalGrossWeight";
+            this.textBoxTotalGrossWeight.Size = new System.Drawing.Size(81, 20);
+            this.textBoxTotalGrossWeight.TabIndex = 39;
+            // 
+            // labelDummy1
+            // 
+            this.labelDummy1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelDummy1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDummy1.Location = new System.Drawing.Point(583, 489);
+            this.labelDummy1.Name = "labelDummy1";
+            this.labelDummy1.Size = new System.Drawing.Size(52, 20);
+            this.labelDummy1.TabIndex = 40;
+            this.labelDummy1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxTotalNetWeight
+            // 
+            this.textBoxTotalNetWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTotalNetWeight.Location = new System.Drawing.Point(634, 489);
+            this.textBoxTotalNetWeight.Name = "textBoxTotalNetWeight";
+            this.textBoxTotalNetWeight.Size = new System.Drawing.Size(90, 20);
+            this.textBoxTotalNetWeight.TabIndex = 41;
+            // 
+            // labelDummy2
+            // 
+            this.labelDummy2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelDummy2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDummy2.Location = new System.Drawing.Point(723, 489);
+            this.labelDummy2.Name = "labelDummy2";
+            this.labelDummy2.Size = new System.Drawing.Size(224, 20);
+            this.labelDummy2.TabIndex = 42;
+            this.labelDummy2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxTotalFine
+            // 
+            this.textBoxTotalFine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTotalFine.Location = new System.Drawing.Point(945, 489);
+            this.textBoxTotalFine.Name = "textBoxTotalFine";
+            this.textBoxTotalFine.Size = new System.Drawing.Size(80, 20);
+            this.textBoxTotalFine.TabIndex = 43;
+            // 
+            // textBoxTotalLabour
+            // 
+            this.textBoxTotalLabour.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTotalLabour.Location = new System.Drawing.Point(1024, 489);
+            this.textBoxTotalLabour.Name = "textBoxTotalLabour";
+            this.textBoxTotalLabour.Size = new System.Drawing.Size(82, 20);
+            this.textBoxTotalLabour.TabIndex = 44;
+            // 
+            // buttonPrint
+            // 
+            this.buttonPrint.Enabled = false;
+            this.buttonPrint.Location = new System.Drawing.Point(595, 522);
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(100, 32);
+            this.buttonPrint.TabIndex = 48;
+            this.buttonPrint.Text = "Print";
+            this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
+            // 
+            // buttonPrintPreview
+            // 
+            this.buttonPrintPreview.Enabled = false;
+            this.buttonPrintPreview.Location = new System.Drawing.Point(489, 522);
+            this.buttonPrintPreview.Name = "buttonPrintPreview";
+            this.buttonPrintPreview.Size = new System.Drawing.Size(100, 32);
+            this.buttonPrintPreview.TabIndex = 47;
+            this.buttonPrintPreview.Text = "Print Preview";
+            this.buttonPrintPreview.UseVisualStyleBackColor = true;
+            this.buttonPrintPreview.Click += new System.EventHandler(this.buttonPrintPreview_Click);
+            // 
+            // buttonCreateInvoice
+            // 
+            this.buttonCreateInvoice.Enabled = false;
+            this.buttonCreateInvoice.Location = new System.Drawing.Point(383, 522);
+            this.buttonCreateInvoice.Name = "buttonCreateInvoice";
+            this.buttonCreateInvoice.Size = new System.Drawing.Size(100, 32);
+            this.buttonCreateInvoice.TabIndex = 45;
+            this.buttonCreateInvoice.Text = "Create Invoice";
+            this.buttonCreateInvoice.UseVisualStyleBackColor = true;
+            this.buttonCreateInvoice.Click += new System.EventHandler(this.buttonCreateInvoice_Click);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(701, 522);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(100, 32);
+            this.buttonCancel.TabIndex = 46;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonExportToExcel
+            // 
+            this.buttonExportToExcel.Location = new System.Drawing.Point(945, 522);
+            this.buttonExportToExcel.Name = "buttonExportToExcel";
+            this.buttonExportToExcel.Size = new System.Drawing.Size(161, 32);
+            this.buttonExportToExcel.TabIndex = 49;
+            this.buttonExportToExcel.Text = "Export To Excel";
+            this.buttonExportToExcel.UseVisualStyleBackColor = true;
+            this.buttonExportToExcel.Click += new System.EventHandler(this.buttonExportToExcel_Click);
             // 
             // Invoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 566);
+            this.Controls.Add(this.buttonExportToExcel);
+            this.Controls.Add(this.buttonPrint);
+            this.Controls.Add(this.buttonPrintPreview);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonCreateInvoice);
+            this.Controls.Add(this.textBoxTotalLabour);
+            this.Controls.Add(this.textBoxTotalFine);
+            this.Controls.Add(this.labelDummy2);
+            this.Controls.Add(this.textBoxTotalNetWeight);
+            this.Controls.Add(this.labelDummy1);
+            this.Controls.Add(this.textBoxTotalGrossWeight);
+            this.Controls.Add(this.labelTotal);
+            this.Controls.Add(this.invoiceDateTimePicker);
+            this.Controls.Add(this.buttonDeleteSelected);
+            this.Controls.Add(this.buttonUpdateItem);
             this.Controls.Add(this.clearEntryButton);
             this.Controls.Add(this.buttonAddNewCustomer);
             this.Controls.Add(this.groupBoxItemEntryMode);
             this.Controls.Add(this.selectCustomerLabel);
             this.Controls.Add(this.selectCustomerComboBox);
-            this.Controls.Add(this.buttonDeleteItem);
-            this.Controls.Add(this.buttonUpdateItem);
             this.Controls.Add(this.buttonAddItem);
             this.Controls.Add(this.groupBoxNewItem);
             this.Controls.Add(this.billDataGridView);
@@ -581,8 +736,6 @@
         private System.Windows.Forms.TextBox fineTextBox;
         private System.Windows.Forms.TextBox labourTextBox;
         private System.Windows.Forms.GroupBox groupBoxNewItem;
-        private System.Windows.Forms.Button buttonDeleteItem;
-        private System.Windows.Forms.Button buttonUpdateItem;
         private System.Windows.Forms.Button buttonAddItem;
         private System.Windows.Forms.BindingSource customersBindingSource;
         private BillingDBDataSetTableAdapters.CustomersTableAdapter customersTableAdapter;
@@ -600,5 +753,20 @@
         private System.Windows.Forms.Button buttonAddNewCustomer;
         private System.Windows.Forms.ComboBox selectItemsComboBox;
         private System.Windows.Forms.Button clearEntryButton;
+        private System.Windows.Forms.Button buttonUpdateItem;
+        private System.Windows.Forms.Button buttonDeleteSelected;
+        private System.Windows.Forms.DateTimePicker invoiceDateTimePicker;
+        private System.Windows.Forms.Label labelTotal;
+        private System.Windows.Forms.TextBox textBoxTotalGrossWeight;
+        private System.Windows.Forms.Label labelDummy1;
+        private System.Windows.Forms.TextBox textBoxTotalNetWeight;
+        private System.Windows.Forms.Label labelDummy2;
+        private System.Windows.Forms.TextBox textBoxTotalFine;
+        private System.Windows.Forms.TextBox textBoxTotalLabour;
+        private System.Windows.Forms.Button buttonPrint;
+        private System.Windows.Forms.Button buttonPrintPreview;
+        private System.Windows.Forms.Button buttonCreateInvoice;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonExportToExcel;
     }
 }
