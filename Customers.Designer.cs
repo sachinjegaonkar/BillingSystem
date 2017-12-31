@@ -38,6 +38,7 @@
             System.Windows.Forms.Label stateLabel;
             System.Windows.Forms.Label pincodeLabel;
             System.Windows.Forms.Label titleLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers));
             this.billingDBDataSet = new BillingSystem.BillingDBDataSet();
             this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.customersTableAdapter = new BillingSystem.BillingDBDataSetTableAdapters.CustomersTableAdapter();
@@ -417,11 +418,13 @@
             this.Controls.Add(this.buttonUpdateCustomer);
             this.Controls.Add(this.buttonAddCustomer);
             this.Controls.Add(this.customersDataGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Customers";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Customers";
+            this.Text = "Add New Customer";
             this.Load += new System.EventHandler(this.Customers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.billingDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).EndInit();

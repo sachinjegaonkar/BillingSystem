@@ -18,13 +18,17 @@ namespace BillingSystem
             {
                 if (c.GetType() == typeof(Label))
                 {
-                    c.BackColor = Color.White;
+                    c.ForeColor = Color.White;
                 }
                 else if (c.GetType() == typeof(TextBox))
                 {
                     c.BackColor = Main.yellowColor;
                 }
                 else if (c.GetType() == typeof(Button))
+                {
+                    c.BackColor = Main.yellowColor;
+                }
+                else if (c.GetType() == typeof(ComboBox))
                 {
                     c.BackColor = Main.yellowColor;
                 }
@@ -70,6 +74,7 @@ namespace BillingSystem
                         }
                         else if (gc.GetType() == typeof(Button))
                         {
+                            gc.ForeColor = Color.Black;
                             gc.BackColor = Main.yellowColor;
                         }
                         else if (gc.GetType() == typeof(ComboBox))

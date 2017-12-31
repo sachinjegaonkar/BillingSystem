@@ -78,6 +78,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillingDBDataSet.cs">
+      <DependentUpon>BillingDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="BillingDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
