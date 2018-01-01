@@ -34,6 +34,8 @@ namespace BillingSystem
         string selectedCustomerID = string.Empty;
         Dictionary<string, string> itemMap = new Dictionary<string, string>();
         string selectedItemName = string.Empty;
+
+        ListView listView = new ListView();
         #endregion
 
         #region Constructor
@@ -782,9 +784,49 @@ namespace BillingSystem
 
         }
 
+        private void LoadItemsDataIntoList()
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                if (billDataGridView.Rows.Count > 1)
+                {
+                    listView.BeginUpdate();
+                    listView.Clear();
+
+                    listView.Items.Clear();
+                    for (int i = 0; i < billDataGridView.Rows.Count; i++)
+                    {
+                        DataGridViewRow row = billDataGridView.Rows[i];
+                        if (row == null)
+                            continue;
+
+                        ListViewItem lvi = new ListViewItem();
+                        for (int j = 1; j < billDataGridView.Columns.Count; j++)
+                        {
+                            lvi.SubItems.Add(row.Cells[j].Value?.ToString());
+                        }
+                        listView.Items.Add(lvi);
+                    }
+                    listView.EndUpdate();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void UpdatePrintPreview()
+        {
+        }
+
         private void buttonPrintPreview_Click(object sender, EventArgs e)
         {
-
+            // ToDo: Move these two functions from this form to PrintPreview form by passing grid items as a listview
+            // to PrintPreview Form.
+            LoadItemsDataIntoList();
+            UpdatePrintPreview();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
