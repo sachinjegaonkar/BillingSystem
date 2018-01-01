@@ -88,7 +88,7 @@
             this.textBoxTotalLabour = new System.Windows.Forms.TextBox();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonPrintPreview = new System.Windows.Forms.Button();
-            this.buttonCreateInvoice = new System.Windows.Forms.Button();
+            this.buttonSaveInvoice = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonExportToExcel = new System.Windows.Forms.Button();
             itemCodeLabel = new System.Windows.Forms.Label();
@@ -633,16 +633,16 @@
             this.buttonPrintPreview.UseVisualStyleBackColor = true;
             this.buttonPrintPreview.Click += new System.EventHandler(this.buttonPrintPreview_Click);
             // 
-            // buttonCreateInvoice
+            // buttonSaveInvoice
             // 
-            this.buttonCreateInvoice.Enabled = false;
-            this.buttonCreateInvoice.Location = new System.Drawing.Point(383, 522);
-            this.buttonCreateInvoice.Name = "buttonCreateInvoice";
-            this.buttonCreateInvoice.Size = new System.Drawing.Size(100, 32);
-            this.buttonCreateInvoice.TabIndex = 45;
-            this.buttonCreateInvoice.Text = "Create Invoice";
-            this.buttonCreateInvoice.UseVisualStyleBackColor = true;
-            this.buttonCreateInvoice.Click += new System.EventHandler(this.buttonCreateInvoice_Click);
+            this.buttonSaveInvoice.Enabled = false;
+            this.buttonSaveInvoice.Location = new System.Drawing.Point(383, 522);
+            this.buttonSaveInvoice.Name = "buttonSaveInvoice";
+            this.buttonSaveInvoice.Size = new System.Drawing.Size(100, 32);
+            this.buttonSaveInvoice.TabIndex = 45;
+            this.buttonSaveInvoice.Text = "Save Invoice";
+            this.buttonSaveInvoice.UseVisualStyleBackColor = true;
+            this.buttonSaveInvoice.Click += new System.EventHandler(this.buttonSaveInvoice_Click);
             // 
             // buttonCancel
             // 
@@ -673,7 +673,7 @@
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonPrintPreview);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonCreateInvoice);
+            this.Controls.Add(this.buttonSaveInvoice);
             this.Controls.Add(this.textBoxTotalLabour);
             this.Controls.Add(this.textBoxTotalFine);
             this.Controls.Add(this.labelDummy2);
@@ -765,7 +765,7 @@
         private System.Windows.Forms.TextBox textBoxTotalLabour;
         private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.Button buttonPrintPreview;
-        private System.Windows.Forms.Button buttonCreateInvoice;
+        private System.Windows.Forms.Button buttonSaveInvoice;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonExportToExcel;
     }

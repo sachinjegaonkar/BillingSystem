@@ -219,6 +219,7 @@ namespace BillingSystem
             netWeightTextBox.BackColor = Color.LightGray;
             fineTextBox.BackColor = Color.LightGray;
             labourTextBox.BackColor = Color.LightGray;
+            invoiceDateTimePicker.MaxDate = DateTime.Today;
 
             // Set cursor as default arrow
             Cursor.Current = Cursors.Default;
@@ -271,7 +272,7 @@ namespace BillingSystem
         {
             try
             {
-                if (IsCurrentRowValid())
+                if (!IsCurrentRowValid())
                 {
                     MessageBox.Show("Please select a valid row.");
                     return;
@@ -409,6 +410,7 @@ namespace BillingSystem
                 // ToDo: Update other fields according to which radio button is selected.
                 selectedItemName = string.Empty;
                 FindItemByCode(itemCodeTextBox.Text.Trim());
+                CalculateFineAndLabour();
             }
         }
 
@@ -581,6 +583,7 @@ namespace BillingSystem
                         {
                             FindItemByCode(pair.Key, false);
                             itemCodeTextBox.Text = pair.Key;
+                            CalculateFineAndLabour();
                         }
                     }
             }
@@ -733,7 +736,7 @@ namespace BillingSystem
             DisplayTotals();
             if (billDataGridView.Rows.Count > 1)
             {
-                buttonCreateInvoice.Enabled = true;
+                buttonSaveInvoice.Enabled = true;
                 buttonPrintPreview.Enabled = true;
                 buttonPrint.Enabled = true;
                 buttonExportToExcel.Enabled = true;
@@ -745,16 +748,11 @@ namespace BillingSystem
             DisplayTotals();
             if (billDataGridView.Rows.Count <= 1)
             {
-                buttonCreateInvoice.Enabled = false;
+                buttonSaveInvoice.Enabled = false;
                 buttonPrintPreview.Enabled = false;
                 buttonPrint.Enabled = false;
                 buttonExportToExcel.Enabled = false;
             }
-        }
-
-        private void buttonCreateInvoice_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)
@@ -793,8 +791,10 @@ namespace BillingSystem
                 var customerName = selectCustomerComboBox.Text.Substring(0, selectCustomerComboBox.Text.IndexOf(" - "));
                 var mobileNumber = selectCustomerComboBox.Text.Substring(selectCustomerComboBox.Text.IndexOf(" - ") + 3);
 
+                var date = invoiceDateTimePicker.Value.ToString("yyyyMMddHHmmss");
+
                 string templateExcel = $"{Directory.GetCurrentDirectory()}\\template.xlsx";
-                string workbookPath = $"{Directory.GetCurrentDirectory()}\\CustomerInvoices\\{customerName}.xlsx";
+                string workbookPath = $"{Directory.GetCurrentDirectory()}\\CustomerInvoices\\{customerName}_{date}.xlsx";
 
                 if (File.Exists(workbookPath)) File.Delete(workbookPath);
                 File.Copy(templateExcel, workbookPath);
@@ -917,6 +917,11 @@ namespace BillingSystem
             {
                 Cursor = Cursors.Default;
             }
+        }
+
+        private void buttonSaveInvoice_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
     }
