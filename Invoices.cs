@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -26,9 +27,11 @@ namespace BillingSystem
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
 
         OleDbConnection dbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=BillingDB.accdb");
-        OleDbCommand dbCommand = new OleDbCommand();
+        OleDbTransaction transaction = null;
 
+        int newInvoiceID = -1;
         Dictionary<string, string> customerMap = new Dictionary<string, string>();
+        string selectedCustomerID = string.Empty;
         Dictionary<string, string> itemMap = new Dictionary<string, string>();
         string selectedItemName = string.Empty;
         #endregion
@@ -219,7 +222,11 @@ namespace BillingSystem
             netWeightTextBox.BackColor = Color.LightGray;
             fineTextBox.BackColor = Color.LightGray;
             labourTextBox.BackColor = Color.LightGray;
+
             invoiceDateTimePicker.MaxDate = DateTime.Today;
+
+            invoicesTableAdapter.SubscribeRowUpdatedEvent(true);
+            itemsSoldTableAdapter.SubscribeRowUpdatedEvent(true);
 
             // Set cursor as default arrow
             Cursor.Current = Cursors.Default;
@@ -312,6 +319,21 @@ namespace BillingSystem
         private void selectCustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Handle Customer Change event
+            selectedCustomerID = string.Empty;
+            if (selectCustomerComboBox.SelectedIndex != -1)
+            {
+                var selectedItem = selectCustomerComboBox.SelectedItem.ToString();
+                // => Targeting to .net v2.0. Dictionary FirstOrDefault or Linq support to dictionary is available since from .net 3.5.
+                // Hence iterate through KeyValuePair to identify the item code associated to selected item in dropdown.
+                if (!string.IsNullOrEmpty(selectedItem))
+                    foreach (KeyValuePair<string, string> pair in customerMap)
+                    {
+                        if (pair.Value == selectedItem)
+                        {
+                            selectedCustomerID = pair.Key;
+                        }
+                    }
+            }
         }
 
         private void OnRadioButtonStateChanged()
@@ -919,9 +941,138 @@ namespace BillingSystem
             }
         }
 
+        private DateTime GetDateWithoutMilliseconds(DateTime d)
+        {
+            return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, d.Second);
+        }
+
+        private void CreateNewInvoice()
+        {
+            try
+            {
+                var queryString = $"insert into Invoices(CustomerID, InvoiceDate) values({selectedCustomerID}, \"{GetDateWithoutMilliseconds(invoiceDateTimePicker.Value)}\")";
+
+                OleDbCommand command = new OleDbCommand(queryString, dbConnection);
+                command.Transaction = transaction;
+                command.ExecuteNonQuery();
+                command.CommandText = "Select @@Identity";
+                newInvoiceID = (int)command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw ex;
+            }
+        }
+
+        private void AddAllInvoiceItems()
+        {
+            try
+            {
+                if (billDataGridView.Rows.Count > 1)
+                {
+                    OleDbCommand command = new OleDbCommand("", dbConnection);
+                    command.Transaction = transaction;
+
+                    for (int i = 0; i < billDataGridView.Rows.Count - 1; i++)
+                    {
+                        DataGridViewRow row = billDataGridView.Rows[i];
+                        if (row == null)
+                            continue;
+
+                        StringBuilder queryString = 
+                            new StringBuilder("insert into ItemsSold (InvoiceNo, ItemID, Pcs, GrossWeight, WtChk, NetWeight, Hishob, Tunch, LabourRate, Fine, Labour) ");
+
+                        queryString.Append($"Values ({newInvoiceID}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[1].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[3].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[4].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[5].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[6].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[7].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[8].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[9].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[10].Value?.ToString())}, ");
+                        queryString.Append($"{Convert.ToDouble(row.Cells[11].Value?.ToString())});");
+
+                        command.CommandText = queryString.ToString();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw ex;
+            }
+        }
+
+        private void DeleteAllInvoiceItems()
+        {
+            try
+            {
+                OleDbCommand command = new OleDbCommand($"Delete from ItemsSold where InvoiceNo = {newInvoiceID}", dbConnection);
+                command.Transaction = transaction;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
+        private void ExecuteInvoiceTransaction()
+        {
+            try
+            {
+                dbConnection.Open();
+                transaction = dbConnection.BeginTransaction();
+                if (buttonSaveInvoice.Text == "Save Invoice")
+                {
+                    if (!string.IsNullOrEmpty(selectedCustomerID))
+                    {
+                        CreateNewInvoice();
+
+                        buttonSaveInvoice.Text = "Update Invoice";
+                        selectCustomerComboBox.Enabled = false;
+
+                        AddAllInvoiceItems();
+                        MessageBox.Show("Invoice Created Successfully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select the valid customer.");
+                    }
+                }
+                else
+                {
+                    // ToDo: Remove all the related items from the ItemsSold table and 
+                    // add the new set into the table.
+                    DeleteAllInvoiceItems();
+                    AddAllInvoiceItems();
+                    MessageBox.Show("Invoice Updated Successfully!");
+                }
+                transaction.Commit();
+                dbConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                try
+                {
+                    transaction.Rollback();
+                    dbConnection.Close();
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
         private void buttonSaveInvoice_Click(object sender, EventArgs e)
         {
-
+            ExecuteInvoiceTransaction();
         }
         #endregion
     }

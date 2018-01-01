@@ -543,6 +543,7 @@
             // 
             // invoiceDateTimePicker
             // 
+            this.invoiceDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.invoicesBindingSource, "InvoiceDate", true));
             this.invoiceDateTimePicker.Location = new System.Drawing.Point(844, 15);
             this.invoiceDateTimePicker.Name = "invoiceDateTimePicker";
             this.invoiceDateTimePicker.Size = new System.Drawing.Size(200, 20);
@@ -668,7 +669,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1120, 566);
+            this.ClientSize = new System.Drawing.Size(1126, 574);
             this.Controls.Add(this.buttonExportToExcel);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonPrintPreview);
