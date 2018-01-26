@@ -35,15 +35,28 @@
             System.Windows.Forms.Label addressLabel;
             System.Windows.Forms.Label eMailIDLabel;
             System.Windows.Forms.Label phoneLabel;
-            System.Windows.Forms.Label stateLabel;
             System.Windows.Forms.Label pincodeLabel;
             System.Windows.Forms.Label titleLabel;
+            System.Windows.Forms.Label stateLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers));
             this.billingDBDataSet = new BillingSystem.BillingDBDataSet();
             this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.customersTableAdapter = new BillingSystem.BillingDBDataSetTableAdapters.CustomersTableAdapter();
             this.tableAdapterManager = new BillingSystem.BillingDBDataSetTableAdapters.TableAdapterManager();
             this.customersDataGridView = new System.Windows.Forms.DataGridView();
+            this.buttonAddCustomer = new System.Windows.Forms.Button();
+            this.buttonUpdateCustomer = new System.Windows.Forms.Button();
+            this.buttonDeleteCustomer = new System.Windows.Forms.Button();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
+            this.lastNameTextBox = new System.Windows.Forms.TextBox();
+            this.organisationTextBox = new System.Windows.Forms.TextBox();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
+            this.eMailIDTextBox = new System.Windows.Forms.TextBox();
+            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.pincodeTextBox = new System.Windows.Forms.TextBox();
+            this.groupBoxNewCustomer = new System.Windows.Forms.GroupBox();
+            this.titleTextBox = new System.Windows.Forms.TextBox();
+            this.stateTextBox = new System.Windows.Forms.TextBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,28 +67,15 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonAddCustomer = new System.Windows.Forms.Button();
-            this.buttonUpdateCustomer = new System.Windows.Forms.Button();
-            this.buttonDeleteCustomer = new System.Windows.Forms.Button();
-            this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.lastNameTextBox = new System.Windows.Forms.TextBox();
-            this.organisationTextBox = new System.Windows.Forms.TextBox();
-            this.addressTextBox = new System.Windows.Forms.TextBox();
-            this.eMailIDTextBox = new System.Windows.Forms.TextBox();
-            this.phoneTextBox = new System.Windows.Forms.TextBox();
-            this.stateTextBox = new System.Windows.Forms.TextBox();
-            this.pincodeTextBox = new System.Windows.Forms.TextBox();
-            this.groupBoxNewCustomer = new System.Windows.Forms.GroupBox();
-            this.titleTextBox = new System.Windows.Forms.TextBox();
             firstNameLabel = new System.Windows.Forms.Label();
             lastNameLabel = new System.Windows.Forms.Label();
             organisationLabel = new System.Windows.Forms.Label();
             addressLabel = new System.Windows.Forms.Label();
             eMailIDLabel = new System.Windows.Forms.Label();
             phoneLabel = new System.Windows.Forms.Label();
-            stateLabel = new System.Windows.Forms.Label();
             pincodeLabel = new System.Windows.Forms.Label();
             titleLabel = new System.Windows.Forms.Label();
+            stateLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.billingDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGridView)).BeginInit();
@@ -87,72 +87,63 @@
             firstNameLabel.AutoSize = true;
             firstNameLabel.Location = new System.Drawing.Point(256, 29);
             firstNameLabel.Name = "firstNameLabel";
-            firstNameLabel.Size = new System.Drawing.Size(60, 13);
-            firstNameLabel.TabIndex = 7;
-            firstNameLabel.Text = "First Name:";
+            firstNameLabel.Size = new System.Drawing.Size(64, 13);
+            firstNameLabel.TabIndex = 2;
+            firstNameLabel.Text = "First Name*:";
             // 
             // lastNameLabel
             // 
             lastNameLabel.AutoSize = true;
             lastNameLabel.Location = new System.Drawing.Point(485, 29);
             lastNameLabel.Name = "lastNameLabel";
-            lastNameLabel.Size = new System.Drawing.Size(61, 13);
-            lastNameLabel.TabIndex = 9;
-            lastNameLabel.Text = "Last Name:";
+            lastNameLabel.Size = new System.Drawing.Size(65, 13);
+            lastNameLabel.TabIndex = 4;
+            lastNameLabel.Text = "Last Name*:";
             // 
             // organisationLabel
             // 
             organisationLabel.AutoSize = true;
-            organisationLabel.Location = new System.Drawing.Point(477, 64);
+            organisationLabel.Location = new System.Drawing.Point(26, 65);
             organisationLabel.Name = "organisationLabel";
-            organisationLabel.Size = new System.Drawing.Size(69, 13);
-            organisationLabel.TabIndex = 11;
-            organisationLabel.Text = "Organisation:";
+            organisationLabel.Size = new System.Drawing.Size(73, 13);
+            organisationLabel.TabIndex = 6;
+            organisationLabel.Text = "Organisation*:";
             // 
             // addressLabel
             // 
             addressLabel.AutoSize = true;
-            addressLabel.Location = new System.Drawing.Point(47, 112);
+            addressLabel.Location = new System.Drawing.Point(268, 78);
             addressLabel.Name = "addressLabel";
-            addressLabel.Size = new System.Drawing.Size(48, 13);
-            addressLabel.TabIndex = 13;
-            addressLabel.Text = "Address:";
+            addressLabel.Size = new System.Drawing.Size(52, 13);
+            addressLabel.TabIndex = 8;
+            addressLabel.Text = "Address*:";
             // 
             // eMailIDLabel
             // 
             eMailIDLabel.AutoSize = true;
-            eMailIDLabel.Location = new System.Drawing.Point(47, 64);
+            eMailIDLabel.Location = new System.Drawing.Point(47, 103);
             eMailIDLabel.Name = "eMailIDLabel";
             eMailIDLabel.Size = new System.Drawing.Size(50, 13);
-            eMailIDLabel.TabIndex = 15;
+            eMailIDLabel.TabIndex = 10;
             eMailIDLabel.Text = "EMail ID:";
             // 
             // phoneLabel
             // 
             phoneLabel.AutoSize = true;
-            phoneLabel.Location = new System.Drawing.Point(275, 64);
+            phoneLabel.Location = new System.Drawing.Point(54, 140);
             phoneLabel.Name = "phoneLabel";
-            phoneLabel.Size = new System.Drawing.Size(41, 13);
-            phoneLabel.TabIndex = 17;
-            phoneLabel.Text = "Phone:";
-            // 
-            // stateLabel
-            // 
-            stateLabel.AutoSize = true;
-            stateLabel.Location = new System.Drawing.Point(511, 99);
-            stateLabel.Name = "stateLabel";
-            stateLabel.Size = new System.Drawing.Size(35, 13);
-            stateLabel.TabIndex = 19;
-            stateLabel.Text = "State:";
+            phoneLabel.Size = new System.Drawing.Size(45, 13);
+            phoneLabel.TabIndex = 12;
+            phoneLabel.Text = "Phone*:";
             // 
             // pincodeLabel
             // 
             pincodeLabel.AutoSize = true;
-            pincodeLabel.Location = new System.Drawing.Point(497, 134);
+            pincodeLabel.Location = new System.Drawing.Point(497, 142);
             pincodeLabel.Name = "pincodeLabel";
-            pincodeLabel.Size = new System.Drawing.Size(49, 13);
-            pincodeLabel.TabIndex = 21;
-            pincodeLabel.Text = "Pincode:";
+            pincodeLabel.Size = new System.Drawing.Size(53, 13);
+            pincodeLabel.TabIndex = 16;
+            pincodeLabel.Text = "Pincode*:";
             // 
             // titleLabel
             // 
@@ -160,7 +151,7 @@
             titleLabel.Location = new System.Drawing.Point(65, 29);
             titleLabel.Name = "titleLabel";
             titleLabel.Size = new System.Drawing.Size(30, 13);
-            titleLabel.TabIndex = 22;
+            titleLabel.TabIndex = 0;
             titleLabel.Text = "Title:";
             // 
             // billingDBDataSet
@@ -206,83 +197,20 @@
             this.customersDataGridView.DataSource = this.customersBindingSource;
             this.customersDataGridView.Location = new System.Drawing.Point(12, 271);
             this.customersDataGridView.Name = "customersDataGridView";
+            this.customersDataGridView.ReadOnly = true;
             this.customersDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.customersDataGridView.Size = new System.Drawing.Size(873, 203);
-            this.customersDataGridView.TabIndex = 1;
+            this.customersDataGridView.TabIndex = 2;
             this.customersDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.customersDataGridView_CellEndEdit);
             this.customersDataGridView.SelectionChanged += new System.EventHandler(this.customersDataGridView_SelectionChanged);
             this.customersDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.customersDataGridView_KeyDown);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 5;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Title";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Title";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "FirstName";
-            this.dataGridViewTextBoxColumn3.HeaderText = "FirstName";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "LastName";
-            this.dataGridViewTextBoxColumn4.HeaderText = "LastName";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Organisation";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Organisation";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Address";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Address";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "EMailID";
-            this.dataGridViewTextBoxColumn7.HeaderText = "EMailID";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Phone";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Phone";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "State";
-            this.dataGridViewTextBoxColumn9.HeaderText = "State";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Pincode";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Pincode";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Width = 75;
             // 
             // buttonAddCustomer
             // 
             this.buttonAddCustomer.Location = new System.Drawing.Point(228, 218);
             this.buttonAddCustomer.Name = "buttonAddCustomer";
             this.buttonAddCustomer.Size = new System.Drawing.Size(108, 32);
-            this.buttonAddCustomer.TabIndex = 2;
+            this.buttonAddCustomer.TabIndex = 1;
             this.buttonAddCustomer.Text = "Add";
             this.buttonAddCustomer.UseVisualStyleBackColor = true;
             this.buttonAddCustomer.Click += new System.EventHandler(this.buttonAddCustomer_Click);
@@ -313,7 +241,7 @@
             this.firstNameTextBox.Location = new System.Drawing.Point(322, 26);
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.Size = new System.Drawing.Size(138, 20);
-            this.firstNameTextBox.TabIndex = 8;
+            this.firstNameTextBox.TabIndex = 3;
             // 
             // lastNameTextBox
             // 
@@ -321,65 +249,57 @@
             this.lastNameTextBox.Location = new System.Drawing.Point(552, 26);
             this.lastNameTextBox.Name = "lastNameTextBox";
             this.lastNameTextBox.Size = new System.Drawing.Size(138, 20);
-            this.lastNameTextBox.TabIndex = 10;
+            this.lastNameTextBox.TabIndex = 5;
             // 
             // organisationTextBox
             // 
             this.organisationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "Organisation", true));
-            this.organisationTextBox.Location = new System.Drawing.Point(552, 61);
+            this.organisationTextBox.Location = new System.Drawing.Point(101, 62);
             this.organisationTextBox.Name = "organisationTextBox";
-            this.organisationTextBox.Size = new System.Drawing.Size(138, 20);
-            this.organisationTextBox.TabIndex = 12;
+            this.organisationTextBox.Size = new System.Drawing.Size(148, 20);
+            this.organisationTextBox.TabIndex = 7;
             // 
             // addressTextBox
             // 
             this.addressTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "Address", true));
-            this.addressTextBox.Location = new System.Drawing.Point(101, 96);
+            this.addressTextBox.Location = new System.Drawing.Point(322, 62);
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.Size = new System.Drawing.Size(321, 60);
-            this.addressTextBox.TabIndex = 14;
+            this.addressTextBox.Size = new System.Drawing.Size(368, 60);
+            this.addressTextBox.TabIndex = 9;
             // 
             // eMailIDTextBox
             // 
             this.eMailIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "EMailID", true));
-            this.eMailIDTextBox.Location = new System.Drawing.Point(101, 61);
+            this.eMailIDTextBox.Location = new System.Drawing.Point(101, 100);
             this.eMailIDTextBox.Name = "eMailIDTextBox";
             this.eMailIDTextBox.Size = new System.Drawing.Size(148, 20);
-            this.eMailIDTextBox.TabIndex = 16;
+            this.eMailIDTextBox.TabIndex = 11;
             // 
             // phoneTextBox
             // 
             this.phoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "Phone", true));
-            this.phoneTextBox.Location = new System.Drawing.Point(322, 61);
+            this.phoneTextBox.Location = new System.Drawing.Point(101, 137);
             this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(138, 20);
-            this.phoneTextBox.TabIndex = 18;
-            // 
-            // stateTextBox
-            // 
-            this.stateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "State", true));
-            this.stateTextBox.Location = new System.Drawing.Point(552, 96);
-            this.stateTextBox.Name = "stateTextBox";
-            this.stateTextBox.Size = new System.Drawing.Size(138, 20);
-            this.stateTextBox.TabIndex = 20;
+            this.phoneTextBox.Size = new System.Drawing.Size(148, 20);
+            this.phoneTextBox.TabIndex = 13;
             // 
             // pincodeTextBox
             // 
             this.pincodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "Pincode", true));
-            this.pincodeTextBox.Location = new System.Drawing.Point(552, 132);
+            this.pincodeTextBox.Location = new System.Drawing.Point(552, 140);
             this.pincodeTextBox.Name = "pincodeTextBox";
             this.pincodeTextBox.Size = new System.Drawing.Size(138, 20);
-            this.pincodeTextBox.TabIndex = 22;
+            this.pincodeTextBox.TabIndex = 17;
             // 
             // groupBoxNewCustomer
             // 
+            this.groupBoxNewCustomer.Controls.Add(stateLabel);
+            this.groupBoxNewCustomer.Controls.Add(this.stateTextBox);
             this.groupBoxNewCustomer.Controls.Add(titleLabel);
             this.groupBoxNewCustomer.Controls.Add(this.titleTextBox);
             this.groupBoxNewCustomer.Controls.Add(pincodeLabel);
             this.groupBoxNewCustomer.Controls.Add(this.pincodeTextBox);
-            this.groupBoxNewCustomer.Controls.Add(stateLabel);
-            this.groupBoxNewCustomer.Controls.Add(this.stateTextBox);
             this.groupBoxNewCustomer.Controls.Add(phoneLabel);
             this.groupBoxNewCustomer.Controls.Add(this.phoneTextBox);
             this.groupBoxNewCustomer.Controls.Add(eMailIDLabel);
@@ -396,7 +316,7 @@
             this.groupBoxNewCustomer.Location = new System.Drawing.Point(76, 22);
             this.groupBoxNewCustomer.Name = "groupBoxNewCustomer";
             this.groupBoxNewCustomer.Size = new System.Drawing.Size(746, 176);
-            this.groupBoxNewCustomer.TabIndex = 23;
+            this.groupBoxNewCustomer.TabIndex = 0;
             this.groupBoxNewCustomer.TabStop = false;
             this.groupBoxNewCustomer.Text = "New Customer";
             // 
@@ -406,7 +326,99 @@
             this.titleTextBox.Location = new System.Drawing.Point(101, 26);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(148, 20);
-            this.titleTextBox.TabIndex = 23;
+            this.titleTextBox.TabIndex = 1;
+            // 
+            // stateLabel
+            // 
+            stateLabel.AutoSize = true;
+            stateLabel.Location = new System.Drawing.Point(281, 142);
+            stateLabel.Name = "stateLabel";
+            stateLabel.Size = new System.Drawing.Size(35, 13);
+            stateLabel.TabIndex = 14;
+            stateLabel.Text = "State:";
+            // 
+            // stateTextBox
+            // 
+            this.stateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customersBindingSource, "State", true));
+            this.stateTextBox.Location = new System.Drawing.Point(322, 139);
+            this.stateTextBox.Name = "stateTextBox";
+            this.stateTextBox.Size = new System.Drawing.Size(138, 20);
+            this.stateTextBox.TabIndex = 15;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 5;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Title";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Title";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "FirstName";
+            this.dataGridViewTextBoxColumn3.HeaderText = "FirstName";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "LastName";
+            this.dataGridViewTextBoxColumn4.HeaderText = "LastName";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Organisation";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Organisation";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Address";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Address";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "EMailID";
+            this.dataGridViewTextBoxColumn7.HeaderText = "EMailID";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Phone";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Phone";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "State";
+            this.dataGridViewTextBoxColumn9.HeaderText = "State";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Pincode";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Pincode";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 75;
             // 
             // Customers
             // 
@@ -442,6 +454,19 @@
         private BillingDBDataSetTableAdapters.CustomersTableAdapter customersTableAdapter;
         private BillingDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DataGridView customersDataGridView;
+        private System.Windows.Forms.Button buttonAddCustomer;
+        private System.Windows.Forms.Button buttonUpdateCustomer;
+        private System.Windows.Forms.Button buttonDeleteCustomer;
+        private System.Windows.Forms.TextBox firstNameTextBox;
+        private System.Windows.Forms.TextBox lastNameTextBox;
+        private System.Windows.Forms.TextBox organisationTextBox;
+        private System.Windows.Forms.TextBox addressTextBox;
+        private System.Windows.Forms.TextBox eMailIDTextBox;
+        private System.Windows.Forms.TextBox phoneTextBox;
+        private System.Windows.Forms.TextBox pincodeTextBox;
+        private System.Windows.Forms.GroupBox groupBoxNewCustomer;
+        private System.Windows.Forms.TextBox titleTextBox;
+        private System.Windows.Forms.TextBox stateTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -452,18 +477,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.Button buttonAddCustomer;
-        private System.Windows.Forms.Button buttonUpdateCustomer;
-        private System.Windows.Forms.Button buttonDeleteCustomer;
-        private System.Windows.Forms.TextBox firstNameTextBox;
-        private System.Windows.Forms.TextBox lastNameTextBox;
-        private System.Windows.Forms.TextBox organisationTextBox;
-        private System.Windows.Forms.TextBox addressTextBox;
-        private System.Windows.Forms.TextBox eMailIDTextBox;
-        private System.Windows.Forms.TextBox phoneTextBox;
-        private System.Windows.Forms.TextBox stateTextBox;
-        private System.Windows.Forms.TextBox pincodeTextBox;
-        private System.Windows.Forms.GroupBox groupBoxNewCustomer;
-        private System.Windows.Forms.TextBox titleTextBox;
     }
 }

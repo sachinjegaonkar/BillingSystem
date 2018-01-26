@@ -26,6 +26,7 @@ namespace BillingSystem
 
             // TODO: This line of code loads data into the 'venkateshBillingDBDataSet.Customers' table. You can move, or remove it, as needed.
             this.customersTableAdapter.Fill(this.billingDBDataSet.Customers);
+            this.customersBindingSource.AddNew();
 
             // Set cursor as default arrow
             Cursor.Current = Cursors.Default;
@@ -33,7 +34,45 @@ namespace BillingSystem
 
         private void buttonAddCustomer_Click(object sender, EventArgs e)
         {
-            this.customersBindingSource.AddNew();
+            if (ValideFields())
+            {
+                // this.customersBindingSource.AddNew();
+                buttonUpdateCustomer_Click(sender, e);
+
+                ClearAllFields();
+                titleTextBox.Focus();
+                this.customersBindingSource.AddNew();
+            }
+            else
+            {
+                MessageBox.Show("Please enter data in the required fields.");
+            }
+        }
+
+        private bool ValideFields()
+        {
+            return /*titleTextBox.Text.Trim() != string.Empty &&*/
+            firstNameTextBox.Text.Trim() != string.Empty &&
+            lastNameTextBox.Text.Trim() != string.Empty &&
+            organisationTextBox.Text.Trim() != string.Empty &&
+            addressTextBox.Text.Trim() != string.Empty &&
+            /*eMailIDTextBox.Text.Trim() != string.Empty &&*/
+            phoneTextBox.Text.Trim() != string.Empty &&
+            /*stateTextBox.Text.Trim() != string.Empty &&*/
+            pincodeTextBox.Text.Trim() != string.Empty;
+        }
+
+        private void ClearAllFields()
+        {
+            titleTextBox.Text = string.Empty;
+            firstNameTextBox.Text = string.Empty;
+            lastNameTextBox.Text = string.Empty;
+            organisationTextBox.Text = string.Empty;
+            addressTextBox.Text = string.Empty;
+            eMailIDTextBox.Text = string.Empty;
+            phoneTextBox.Text = string.Empty;
+            stateTextBox.Text = string.Empty;
+            pincodeTextBox.Text = string.Empty;
         }
 
         private void buttonUpdateCustomer_Click(object sender, EventArgs e)
