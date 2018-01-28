@@ -36,6 +36,10 @@ namespace BillingSystem
                 {
                     c.BackColor = Main.yellowColor;
                 }
+                else if (c.GetType() == typeof(PrintPreviewControl))
+                {
+                    c.ForeColor = Main.yellowColor;
+                }
                 else if (c.GetType() == typeof(DataGridView))
                 {
                     ((DataGridView)c).BackgroundColor = Main.brandColor;
@@ -86,6 +90,11 @@ namespace BillingSystem
                             gc.BackColor = Main.yellowColor;
                         }
                         else if (gc.GetType() == typeof(RadioButton))
+                        {
+                            gc.ForeColor = Color.White;
+                            gc.BackColor = Main.brandColor;
+                        }
+                        else if (gc.GetType() == typeof(CheckBox))
                         {
                             gc.ForeColor = Color.White;
                             gc.BackColor = Main.brandColor;

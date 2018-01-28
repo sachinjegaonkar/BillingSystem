@@ -35,7 +35,6 @@ namespace BillingSystem
         Dictionary<string, string> itemMap = new Dictionary<string, string>();
         string selectedItemName = string.Empty;
 
-        ListView listView = new ListView();
         #endregion
 
         #region Constructor
@@ -761,7 +760,6 @@ namespace BillingSystem
             if (billDataGridView.Rows.Count > 1)
             {
                 buttonSaveInvoice.Enabled = true;
-                buttonPrintPreview.Enabled = true;
                 buttonPrint.Enabled = true;
                 buttonExportToExcel.Enabled = true;
             }
@@ -773,7 +771,6 @@ namespace BillingSystem
             if (billDataGridView.Rows.Count <= 1)
             {
                 buttonSaveInvoice.Enabled = false;
-                buttonPrintPreview.Enabled = false;
                 buttonPrint.Enabled = false;
                 buttonExportToExcel.Enabled = false;
             }
@@ -781,12 +778,31 @@ namespace BillingSystem
 
         private void buttonPrint_Click(object sender, EventArgs e)
         {
+            // ToDo: Move these two functions from this form to PrintPreview form by passing grid items as a listview
+            // to PrintPreview Form.
+            var listView = GetItemsDataAsListView();
 
+            if (listView.Items.Count > 0)
+            {
+                var selectedCustomer = selectCustomerComboBox.SelectedItem.ToString();
+                PrintInvoice printPreviewForm = new PrintInvoice(listView,
+                    selectedCustomer,
+                    textBoxTotalGrossWeight.Text,
+                    textBoxTotalNetWeight.Text,
+                    textBoxTotalFine.Text,
+                    textBoxTotalLabour.Text
+                    );
+                printPreviewForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No Items to be shown in print privew.");
+            }
         }
 
-        private void LoadItemsDataIntoList()
+        private ListView GetItemsDataAsListView()
         {
-            DataSet ds = new DataSet();
+            ListView listView = new ListView();
             try
             {
                 if (billDataGridView.Rows.Count > 1)
@@ -804,7 +820,10 @@ namespace BillingSystem
                         ListViewItem lvi = new ListViewItem();
                         for (int j = 1; j < billDataGridView.Columns.Count; j++)
                         {
-                            lvi.SubItems.Add(row.Cells[j].Value?.ToString());
+                            if (j != 1)
+                                lvi.SubItems.Add(row.Cells[j].Value?.ToString());
+                            else
+                                lvi.SubItems[0].Text = row.Cells[j].Value?.ToString();
                         }
                         listView.Items.Add(lvi);
                     }
@@ -815,18 +834,7 @@ namespace BillingSystem
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void UpdatePrintPreview()
-        {
-        }
-
-        private void buttonPrintPreview_Click(object sender, EventArgs e)
-        {
-            // ToDo: Move these two functions from this form to PrintPreview form by passing grid items as a listview
-            // to PrintPreview Form.
-            LoadItemsDataIntoList();
-            UpdatePrintPreview();
+            return listView;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

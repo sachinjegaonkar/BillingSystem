@@ -1122,6 +1122,7 @@ namespace BillingSystem
     {
         public ListViewPrinter()
         {
+            this.DefaultPageSettings.Landscape = true;
         }
 
 #if !WITHOUT_OBJECTLISTVIEW
